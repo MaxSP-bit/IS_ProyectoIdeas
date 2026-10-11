@@ -26,30 +26,36 @@ class PracticaFormulario extends Page implements HasSchemas
     {
         return $schema
              ->components([
-                   Section::make('Nombre alumno')
+                   Section::make('Maximiliano Soto Palao y Ochoa Trejo José Fernando.')
                      ->schema([
-                         TextInput::make('x')
+                         TextInput::make('nombre')
                             ->label('Nombre del proyecto')
                             ->required(),
                             
                     Select::make('temas')
-                            ->label('Temas')
-                            ->options([
-                                'tecnologia' => 'Tecnología',
-                                'educacion' => 'Educación',
-                                'salud' => 'Salud',
-                                'medio_ambiente' => 'Medio ambiente',
-                                'entretenimiento' => 'Entretenimiento',
-                                ])
-                                ->required(),
+                        ->label('Temas')
+                        ->options([
+                            'tecnologia' => 'Tecnología',
+                            'educacion' => 'Educación',
+                            'salud' => 'Salud',
+                            'medio_ambiente' => 'Medio ambiente',
+                            'entretenimiento' => 'Entretenimiento',
+                            ])
+                            ->required(),
 
                     Toggle::make('activo') 
                         ->label('Proyecto activo') 
                         ->default(true),
                         
+                    Radio::make('prioridad')
+                        ->label('Prioridad')
+                        ->options([
+                            'alta' => 'Alta',
+                            'media' => 'Media',
+                            'baja' => 'Baja',
                           ])
-                        ])
-                          
+                    ])
+             ])      
         ->statePath('data');
     }
 
