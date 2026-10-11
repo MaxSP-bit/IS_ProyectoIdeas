@@ -54,6 +54,11 @@ class PracticaFormulario extends Page implements HasSchemas
                             'media' => 'Media',
                             'baja' => 'Baja',
                           ])
+
+                    DatePicker::make('fecha_entrega')
+                        ->label('Fecha de entrega')
+                        ->required(),      
+
                     ])
              ])      
         ->statePath('data');
