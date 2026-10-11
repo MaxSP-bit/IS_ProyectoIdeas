@@ -50,16 +50,15 @@ class PracticaFormulario extends Page implements HasSchemas
                     Radio::make('prioridad')
                         ->label('Prioridad')
                         ->options([
-                            'alta' => 'Alta',
-                            'media' => 'Media',
                             'baja' => 'Baja',
-                          ])
+                            'media' => 'Media',
+                            'alta' => 'Alta',
+                        ]),
 
                     DatePicker::make('fecha_entrega')
                         ->label('Fecha de entrega')
-                        ->required(),      
-
-                    ])
+                        ->required(),
+                        ]),
              ])      
         ->statePath('data');
     }
