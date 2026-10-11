@@ -28,7 +28,7 @@ class PracticaFormulario extends Page implements HasSchemas
              ->components([
                    Section::make('Nombre alumno')
                      ->schema([
-                         TextInput::make('nombre')
+                         TextInput::make('x')
                             ->label('Nombre del proyecto')
                             ->required(),
                             
@@ -42,6 +42,11 @@ class PracticaFormulario extends Page implements HasSchemas
                                 'entretenimiento' => 'Entretenimiento',
                                 ])
                                 ->required(),
+
+                    Toggle::make('activo') 
+                        ->label('Proyecto activo') 
+                        ->default(true),
+                        
                           ])
                         ])
                           
