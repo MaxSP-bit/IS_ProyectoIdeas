@@ -8,6 +8,7 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateCategoria extends CreateRecord
 {
     protected static string $resource = CategoriaResource::class;
+    protected static ?string $title = 'Crear Categoría';
     protected static bool $canCreateAnother = false;
 
         protected function getRedirectUrl(): string
