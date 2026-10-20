@@ -10,6 +10,12 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Actions\ViewAction;
+use Filament\Actions\DeleteAction; 
+use Filament\Actions\RestoreAction; 
+use Filament\Actions\ForceDeleteAction; 
+use Filament\Tables\Filters\TrashedFilter; 
+use Illuminate\Database\Eloquent\Builder; 
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class IdeasTable
 {
@@ -68,9 +74,13 @@ class IdeasTable
                     'aprobada' => 'Aprobada',
                     'rechazada' => 'Rechazada',
                     ]),
+                TrashedFilter::make(), // Filtro para mostrar registros eliminados
             ])
             ->recordActions([
                 EditAction::make(),
+                DeleteAction::make(), // Acción de borrado suave
+                RestoreAction::make(), // Acción de restauración
+                ForceDeleteAction::make(), // Acción de borrado permanente
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

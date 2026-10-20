@@ -24,7 +24,7 @@ class EditCategoria extends EditRecord
     {
         return [
             DeleteAction::make()
-            ->hidden(fn ($record) => $record->ideas()->exists()), // Oculta el botón de eliminar si la categoría tiene ideas asociadas
+            ->hidden(fn ($record) => $record->ideas()->withTrashed()->exists()), // Oculta el botón de eliminar si la categoría tiene ideas asociadas
         ];
     }
 }
