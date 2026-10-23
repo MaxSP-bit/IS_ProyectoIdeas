@@ -20,6 +20,7 @@ use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use Filament\Actions\Action;
 use Filament\Notifications\Notification;
+use Filament\Forms\Components\Textarea;
 
 class IdeasTable
 {
@@ -108,6 +109,27 @@ class IdeasTable
                     ->success()
                     ->send();
                 }),
+                Action::make('rechazar')->label('Rechazar')
+                ->color('danger')->requiresConfirmation()
+                ->modalHeading('Rechazo')
+                ->modalDescription('¿Deseas rechazar esta idea?')
+                ->schema([
+                    Textarea::make('observacion')
+                        ->label('Motivo del rechazo')
+                        ->required()
+                        ->rows(4),
+                ])
+                ->action(function (Idea $record) {
+                    $record->update([
+                        'estado' => 'rechazada',
+                        'observacion' => $data['observacion'],
+                    ]);
+
+                    Notification::make()
+                    ->title('Idea rechazada correctamente')
+                    ->success()
+                    ->send();
+                })
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
