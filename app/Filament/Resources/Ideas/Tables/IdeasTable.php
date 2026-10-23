@@ -18,6 +18,8 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
+use Filament\Actions\Action;
+use Filament\Notifications\Notification;
 
 class IdeasTable
 {
@@ -33,12 +35,14 @@ class IdeasTable
                 TextColumn::make('titulo')
                     ->label('Idea')
                     ->searchable()
-                    ->toggleable(),
+                    ->toggleable()
+                    ->wrap(),
 
                 TextColumn::make('descripcion')
                     ->label('Descripción')
                     ->searchable()
-                    ->toggleable(),
+                    ->toggleable()
+                    ->wrap(),
 
                 TextColumn::make('estado')
                     ->label('Estado')
@@ -48,12 +52,12 @@ class IdeasTable
                 TextColumn::make('autor')
                     ->label('Autor')
                     ->searchable()
-                    ->toggleable(),
+                    ->toggleable(isToggledHiddenByDefault: true),
 
                 TextColumn::make('categoria.nombre')
                     ->label('Categoría')
                     ->searchable()
-                    ->toggleable(),
+                    ->toggleable(isToggledHiddenByDefault: true),
 
                 TextColumn::make('created_at')
                     ->label('Creado el')
@@ -91,10 +95,23 @@ class IdeasTable
                 DeleteAction::make(), // Acción de borrado suave
                 RestoreAction::make(), // Acción de restauración
                 ForceDeleteAction::make(), // Acción de borrado permanente
+                Action::make('aprobar')->label('Aprobar')
+                ->color('success')->requiresConfirmation()
+                ->modalHeading('Aprobación')
+                ->modalDescription('¿Deseas aprobar esta idea?')
+
+                ->action(function (Idea $record) {
+                    $record->update(['estado' => 'aprobada']);
+
+                    Notification::make()
+                    ->title('Idea aprobada correctamente')
+                    ->success()
+                    ->send();
+                }),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                   // DeleteBulkAction::make(),
                 ]),
             ]);
     }
