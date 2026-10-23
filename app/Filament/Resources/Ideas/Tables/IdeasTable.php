@@ -111,6 +111,7 @@ class IdeasTable
                 }),
                 Action::make('rechazar')->label('Rechazar')
                 ->color('danger')->requiresConfirmation()
+                ->hidden(fn (Idea $record) => $record->estado === 'rechazada')
                 ->modalHeading('Rechazo')
                 ->modalDescription('¿Deseas rechazar esta idea?')
                 ->schema([
