@@ -120,7 +120,7 @@ class IdeasTable
                         ->required()
                         ->rows(4),
                 ])
-                ->action(function (Idea $record) {
+                ->action(function (Idea $record, array $data) {
                     $record->update([
                         'estado' => 'rechazada',
                         'observacion' => $data['observacion'],
